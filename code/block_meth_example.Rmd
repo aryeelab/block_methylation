@@ -1,9 +1,18 @@
 library(rtracklayer)
+library(GenomicRanges)
+library(AnnotationHub)
+
 
 # Load methylation track
 hct116_meth <- import(hct116_cpg.bw)
 
 # Filter out CGIs
+ah <- AnnotationHub()
+#query(ah, "hg38")
+cpg_hub <- ah[['AH73831']]
+cpg_islands <- cpg_hub$granges
+keep <- countOverlaps(hct116_meth, cpg_islands)==0
+hct116_meth <- hct116_meth[keep]
 
 
 # Load blocks
@@ -11,6 +20,8 @@ blocks <- import("data/hansenBlocks.bed")
 
 # Subset methylation to blocks
 
-hct116_block_meth <- subsetByOverlaps(hct116_meth, blocks)
+keep <- countOverlaps(hct116_meth, blocks)>0
+hct116_block_meth <- hct116_meth[keep]
 
 # Average methylation
+mean(hct116_block_meth$score)
