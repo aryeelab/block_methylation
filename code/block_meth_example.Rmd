@@ -1,7 +1,8 @@
 library(rtracklayer)
 
-
+# Load methylation track
 hct116_meth <- import(hct116_cpg.bw)
+
 # Filter out CGIs
 
 
