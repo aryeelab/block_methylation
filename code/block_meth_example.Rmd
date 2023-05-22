@@ -7,6 +7,7 @@ hct116_meth <- import(hct116_cpg.bw)
 
 
 # Load blocks
+blocks <- import("data/hansenBlocks.bed")
 
 # Subset methylation to blocks
 
