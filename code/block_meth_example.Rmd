@@ -1,0 +1,14 @@
+library(rtracklayer)
+
+
+hct116_meth <- import(hct116_cpg.bw)
+# Filter out CGIs
+
+
+# Load blocks
+
+# Subset methylation to blocks
+
+hct116_block_meth <- subsetByOverlaps(hct116_meth, blocks)
+
+# Average methylation
